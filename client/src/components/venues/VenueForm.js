@@ -3,19 +3,20 @@ import { reduxForm, Field } from 'redux-form';
 import { Form, Button } from 'semantic-ui-react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-class VenueForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { address: '' };
-    this.onChange = (address) => this.setState({ address });
-  }
+const AutcompleteItem = field => {
+  const inputProps = {
+    value: field.input.value,
+    onChange: field.input.onChange
+  };
 
+  return (
+    <PlacesAutocomplete inputProps={inputProps} />
+  );
+};
+
+class VenueForm extends React.Component {
   render() {
     const { handleSubmit } = this.props;
-    const inputProps = {
-      value: this.state.address,
-      onChange: this.onChange
-    };
 
     return (
       <Form onSubmit={ handleSubmit }>
@@ -32,9 +33,8 @@ class VenueForm extends React.Component {
           <label>Location</label>
           <Field 
             name='location'
-            component={PlacesAutocomplete}
+            component={AutcompleteItem}
             type='text'
-            inputProps={inputProps}
           />     
         </Form.Field>
         <Button type='submit' color='blue'>Next</Button>
