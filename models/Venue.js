@@ -5,7 +5,7 @@ const venueSchema = new Schema({
   creator: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
-    required: 'You must supply a creator'
+    required: 'A venue must have a creator!'
   },
   name: {
     type: String,
