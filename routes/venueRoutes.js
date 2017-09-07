@@ -17,11 +17,9 @@ const multerOptions = {
   }
 };
 
-function upload() {
-  multer(multerOptions).single('photo');
-}
+const upload = multer(multerOptions).single('photo');
 
-async function resize(req, res, next) {
+const resize = async (req, res, next) => {
   if (!req.file) return next();
 
   const extension = req.file.mimetype.split('/')[1];
@@ -41,23 +39,26 @@ module.exports = app => {
   });
 
   // Create new venue
-  app.post('/api/venues', requireLogin, async (req, res) => {
-    console.log(req.body);
-    const { name, location, photo } = req.body;
-    
-    const venue = new Venue({
-      creator: req.user.id,
-      name,
-      location,
-      photo
-    });
+  app.post('/api/venues',
+    requireLogin, 
+    upload,
+    resize,
+    async (req, res) => {
+      console.log(req, req.body);
+      const { name, location, photo } = req.body;
+      
+      const venue = new Venue({
+        creator: req.user.id,
+        name,
+        location,
+        photo
+      });
 
-
-    try {
-      await venue.save();
-      res.status(200).send({});
-    } catch(err) {
-      res.status(422).send(err);
-    }
+      try {
+        await venue.save();
+        res.status(200).send({});
+      } catch(err) {
+        res.status(422).send(err);
+      }
   });
 };
