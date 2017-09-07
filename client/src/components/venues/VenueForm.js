@@ -23,27 +23,33 @@ const FileInput = field => {
 };
 
 class VenueForm extends React.Component {
-  async _onFormSubmit(values) {
+  async onFormSubmit(values) {
     const geocoded = await geocodeByAddress(values.location);
     const latLng = await getLatLng(geocoded[0]);
-    
+
     values = {
-      ...values, 
+      ...values,
       location: {
-        address:  geocoded[0].formatted_address,
-        coordinates: [ latLng.lat, latLng.lng ]
-      }
+        coordinates: [ latLng.lat, latLng.lng ],
+        address: geocoded[0].formatted_address,
+      },
+      photo: values.photo[0]
     };
 
-    await axios.post('/api/venues', values);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+
+    await axios.post('/api/venues', values, config);
   }
 
   render() {
-    console.log(actions);
     const { handleSubmit } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(this._onFormSubmit)} encType='multipart/form-data'>
+      <Form onSubmit={handleSubmit(this.onFormSubmit)} encType='multipart/form-data'>
         <Form.Field>
           <label>Name</label>
           <Field
