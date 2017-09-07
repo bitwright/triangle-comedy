@@ -8,6 +8,7 @@ class VenueLanding extends React.Component {
     return (
       <Container>
         <h1>VenueLanding</h1>
+        <VenueList />
         <Button 
           as={Link}
           to='/venues/new'

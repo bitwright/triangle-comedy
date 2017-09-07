@@ -12,7 +12,7 @@ class Header extends React.Component {
       case false:
         return (
           <Menu.Item>
-            <Button as='a' href='/oauth/google' color='red' inverted>
+            <Button as='a' href='/oauth/google' color='red'>
               <Icon name='google' /> Login with Google
             </Button>
           </Menu.Item>
@@ -30,7 +30,7 @@ class Header extends React.Component {
     return (
       <Menu stackable>
         <Menu.Item as={Link} to='/' header>
-          <img src={logo} /> Triangle Comedy
+          <img src={logo} alt='logo' /> Triangle Comedy
         </Menu.Item>
         <Menu.Item as={Link} to='/venues'>Venues</Menu.Item>
         <Menu.Item as={Link} to='/shows'>Shows</Menu.Item>
