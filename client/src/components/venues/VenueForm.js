@@ -19,7 +19,13 @@ const AutcompleteItem = field => {
 
 const FileInput = field => {
   delete field.input.value;
-  return <input type='file' {...field.input} />;
+  return (
+    <input 
+      type='file'
+      accept='image/gif, image/png, image/jpeg'
+      {...field.input}
+    />
+  );
 };
 
 class VenueForm extends React.Component {
@@ -36,13 +42,19 @@ class VenueForm extends React.Component {
       photo: values.photo[0]
     };
 
+    const data = new FormData();
+    data.append('name', values.name);
+    data.append('photo', values.photo);
+    data.append('location', JSON.stringify(values.location));
+
     const config = {
       headers: {
         'content-type': 'multipart/form-data'
       }
     }
 
-    await axios.post('/api/venues', values, config);
+    console.log(values);
+    await axios.post('/api/venues', data, config);
   }
 
   render() {
@@ -71,8 +83,8 @@ class VenueForm extends React.Component {
           <label>Photo</label>
           <Field
             name='photo'
+            id='photo'
             component={FileInput}
-            accept='image/gif, image/png, image/jpeg' 
           />
         </Form.Field>
         <Button type='submit' color='blue'>Create</Button>
