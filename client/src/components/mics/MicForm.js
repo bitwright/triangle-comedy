@@ -2,23 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Form, Button, Dropdown } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import Datetime from 'react-datetime';
+import { renderField, FileInput, DropdownInput, DatetimeInput } from '../FormFields';
 import '../react-datetime.css';
 import * as actions from '../../actions';
 import axios from 'axios';
 import moment from 'moment';
-
-const FileInput = field => {
-  delete field.input.value;
-  return (
-    <input
-      type='file'
-      accept='image/gif, image/png, image/jpeg'
-      {...field.input}
-    />
-  );
-}
 
 class MicForm extends React.Component {
   componentDidMount() {
@@ -32,7 +22,9 @@ class MicForm extends React.Component {
     data.append('description', values.description);
     data.append('time', new Date(moment(values.time._d).format('MM/DD/YYYY hh:mm A')));
     data.append('venue', values.venue);
-    data.append('photo', values.photo[0]);
+    if (values.photo) {
+      data.append('photo', values.photo[0]);
+    }
 
     const config = {
       headers: {
@@ -44,12 +36,7 @@ class MicForm extends React.Component {
   }
 
   render() {
-    const { handleSubmit } = this.props;
-    const venueOptions = [
-      this.props.venues.map(venue => {
-        return { text: venue.name, value: venue.id };
-      })
-    ];
+    const { error, handleSubmit, pristine, submitting } = this.props;
 
     return (
       <Form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
@@ -57,7 +44,7 @@ class MicForm extends React.Component {
           <label>Name</label>
           <Field
             name='name'
-            component='input'
+            component={renderField}
             type='text'
           />
         </Form.Field>
@@ -65,31 +52,23 @@ class MicForm extends React.Component {
           <label>Description</label>
           <Field
             name='description'
-            component='textarea'
+            component={renderField}
+            type='text'
           />
         </Form.Field>
         <Form.Field>
           <label>Time</label>
           <Field 
             name='time'
-            component={props => 
-              <Datetime {...props.input} 
-            />}
+            component={DatetimeInput}
           />
         </Form.Field>
         <Form.Field>
           <label>Venue</label>
           <Field 
             name='venue'
-            component={props => 
-              <Dropdown 
-                placeholder='Select a venue' 
-                selection 
-                options={venueOptions[0]} 
-                {...props.input}
-                value={props.input.value}
-                onChange={(param, data) => props.input.onChange(data.value)}
-            />}
+            component={DropdownInput}
+            venues={this.props.venues}
           />
         </Form.Field>
         <Form.Field>
@@ -100,6 +79,7 @@ class MicForm extends React.Component {
             component={FileInput}
           />
         </Form.Field>
+        {error && <strong>{error}</strong>}
         <Button type='submit' color='blue'>Create</Button>
       </Form>
     );
@@ -108,6 +88,11 @@ class MicForm extends React.Component {
 
 function validate(values) {
   const errors = {};
+
+  if (!values.name) errors.name = 'You must enter a name!';
+  if (!values.description) errors.description = 'You must enter a description!'
+  if (!values.time) errors.time = 'You must enter a time!';
+  if (!values.venue) errors.venue = 'You must enter a venue!';
 
   return errors;
 }
@@ -118,5 +103,5 @@ function mapStateToProps({ venues }) {
 
 export default reduxForm({
   validate,
-  form: 'mic'
+  form: 'mics'
 })(connect(mapStateToProps, actions)(withRouter(MicForm)));

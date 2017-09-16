@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Icon, Table } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import * as actions from '../../actions';
 import moment from 'moment';
 

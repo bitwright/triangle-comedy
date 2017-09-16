@@ -13,7 +13,6 @@ import MicLanding from './mics/MicLanding';
 import MicNew from './mics/MicNew';
 import ClassLanding from './classes/ClassLanding';
 import ClassNew from './classes/ClassNew';
-import Map from './Map';
 
 class App extends React.Component {
   componentDidMount() {
