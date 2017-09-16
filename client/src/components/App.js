@@ -13,7 +13,7 @@ import MicLanding from './mics/MicLanding';
 import MicNew from './mics/MicNew';
 import ClassLanding from './classes/ClassLanding';
 import ClassNew from './classes/ClassNew';
-// import Map from './Map';
+import Map from './Map';
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,7 +34,6 @@ class App extends React.Component {
           <Route exact path="/mics/new" component={MicNew} />
           <Route exact path="/classes" component={ClassLanding} />
           <Route exact path="/classes/new" component={ClassNew} />
-          {/* <Route exact path="/map" component={Map} /> */}
         </div>
       </BrowserRouter>  
     );

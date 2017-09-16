@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container, Icon, List } from 'semantic-ui-react';
+import MapContainer from './Map';
 
 export default () => {
   return (
-    <Container>
+    <Container textAlign='center'>
       <h1>Triangle Comedy</h1>
-      <List>
+      <List horizontal>
         <List.Item as='a'>
           <Icon name='check' />
           <List.Content>
@@ -31,6 +32,10 @@ export default () => {
           </List.Content> 
         </List.Item>
       </List>
+
+      <hr />
+
+      <MapContainer />
     </Container>
   );
 }
