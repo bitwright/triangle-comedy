@@ -3,7 +3,6 @@ import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import * as actions from '../../actions';
 import axios from 'axios';
 
 const AutcompleteItem = field => {
@@ -32,19 +31,16 @@ class VenueForm extends React.Component {
   async onFormSubmit(values) {
     const geocoded = await geocodeByAddress(values.location);
     const latLng = await getLatLng(geocoded[0]);
+    this.props.history.push('/venues');
 
-    values = {
-      ...values,
-      location: {
-        coordinates: [ latLng.lat, latLng.lng ],
-        address: geocoded[0].formatted_address,
-      },
-      photo: values.photo[0]
+    values.location = {
+      coordinates: [ latLng.lat, latLng.lng ],
+      address: geocoded[0].formatted_address
     };
 
     const data = new FormData();
     data.append('name', values.name);
-    data.append('photo', values.photo);
+    data.append('photo', values.photo[0]);
     data.append('location', JSON.stringify(values.location));
 
     const config = {
@@ -53,7 +49,6 @@ class VenueForm extends React.Component {
       }
     }
 
-    console.log(values);
     await axios.post('/api/venues', data, config);
   }
 
@@ -61,7 +56,7 @@ class VenueForm extends React.Component {
     const { handleSubmit } = this.props;
 
     return (
-      <Form onSubmit={handleSubmit(this.onFormSubmit)} encType='multipart/form-data'>
+      <Form onSubmit={handleSubmit(this.onFormSubmit.bind(this))} encType='multipart/form-data'>
         <Form.Field>
           <label>Name</label>
           <Field
@@ -104,6 +99,5 @@ function validate(values) {
 
 export default reduxForm({
   validate,
-  form: 'venue',
-  destroyOnUnmount: true
-}, null, actions)(withRouter(VenueForm));
+  form: 'venue'
+})(withRouter(VenueForm));

@@ -7,14 +7,14 @@ class VenueLanding extends React.Component {
   render() {
     return (
       <Container>
-        <h1>VenueLanding</h1>
+        <h1>Venues</h1>
         <VenueList />
         <Button 
           as={Link}
           to='/venues/new'
           circular 
           icon='plus' 
-          color='red' 
+          color='black'
           floated='right' 
           size='large' 
         />

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container, Button } from 'semantic-ui-react'; 
 import { Link } from 'react-router-dom';
-import ShowList from './ShowList';
+import MicList from './MicList';
 
-class ShowLanding extends React.Component {
+class MicLanding extends React.Component {
   render() {
     return (
       <Container>
-        <h1>Shows</h1>
-        <ShowList />
+        <h1>Mics</h1>
+        <MicList />
         <Button
           as={Link}
-          to='/shows/new'
+          to='/mics/new'
           circular
           icon='plus'
           color='black'
@@ -23,4 +23,4 @@ class ShowLanding extends React.Component {
   }
 }
 
-export default ShowLanding;
+export default MicLanding;

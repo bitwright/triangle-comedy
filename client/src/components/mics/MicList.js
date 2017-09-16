@@ -4,29 +4,29 @@ import { Icon, Table } from 'semantic-ui-react';
 import * as actions from '../../actions';
 import moment from 'moment';
 
-class ShowList extends React.Component {
+class MicList extends React.Component {
   componentDidMount() {
-  	this.props.fetchShows();
+  	this.props.fetchMics();
     this.props.fetchVenues();
   }
 
-  renderShows() {
+  renderMics() {
 
   	return (
-  	  this.props.events.map(show => {
+  	  this.props.events.map(mic => {
     		return (
-          <Table.Row key={show.name}>
+          <Table.Row key={mic.name}>
             <Table.Cell collapsing>
-              {show.name}
+              {mic.name}
             </Table.Cell>
             <Table.Cell collapsing>
-              {show.description}
+              {mic.description}
             </Table.Cell>
             <Table.Cell>
-              {show.venue}
+              {mic.venue}
             </Table.Cell>
             <Table.Cell>
-              {moment(show.time).format('hA - dddd, MMMM Do YYYY')}
+              {moment(mic.time).format('hA - dddd, MMMM Do YYYY')}
             </Table.Cell>
           </Table.Row>
     		) 
@@ -41,7 +41,7 @@ class ShowList extends React.Component {
         <Table celled striped>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan='4'>Upcoming Shows</Table.HeaderCell>
+              <Table.HeaderCell colSpan='4'>Upcoming Mics</Table.HeaderCell>
             </Table.Row>
             <Table.Row>
               <Table.HeaderCell rowSpan='2'>Name</Table.HeaderCell>
@@ -52,7 +52,7 @@ class ShowList extends React.Component {
           </Table.Header>
 
           <Table.Body>
-            {this.renderShows()}
+            {this.renderMics()}
           </Table.Body>
         </Table>
   	  </div>
@@ -64,4 +64,4 @@ function mapStateToProps({ events, venues }) {
   return { events, venues };
 }
 
-export default connect(mapStateToProps, actions)(ShowList);
+export default connect(mapStateToProps, actions)(MicList);

@@ -44,12 +44,9 @@ module.exports = app => {
     upload,
     resize,
     async (req, res) => {
-      console.log(req.body);
       req.body.creator = req.user.id;
       req.body.location = JSON.parse(req.body.location);
       const venue = new Venue(req.body); 
-
-      console.log(venue);
 
       try {
         await venue.save();

@@ -4,44 +4,44 @@ import { Icon, Table } from 'semantic-ui-react';
 import * as actions from '../../actions';
 import moment from 'moment';
 
-class ShowList extends React.Component {
+class ClassList extends React.Component {
   componentDidMount() {
-  	this.props.fetchShows();
+    this.props.fetchClasses();
     this.props.fetchVenues();
   }
 
-  renderShows() {
+  renderClasses() {
 
-  	return (
-  	  this.props.events.map(show => {
-    		return (
-          <Table.Row key={show.name}>
+    return (
+      this.props.events.map(event => {
+        return (
+          <Table.Row key={event.name}>
             <Table.Cell collapsing>
-              {show.name}
+              {event.name}
             </Table.Cell>
             <Table.Cell collapsing>
-              {show.description}
+              {event.description}
             </Table.Cell>
             <Table.Cell>
-              {show.venue}
+              {event.venue}
             </Table.Cell>
             <Table.Cell>
-              {moment(show.time).format('hA - dddd, MMMM Do YYYY')}
+              {moment(event.time).format('hA - dddd, MMMM Do YYYY')}
             </Table.Cell>
           </Table.Row>
-    		) 
-  	  })
-  	);
+        ) 
+      })
+    );
   }
 
   render() {
     console.log(this.props);
-  	return (
-  	  <div>
+    return (
+      <div>
         <Table celled striped>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell colSpan='4'>Upcoming Shows</Table.HeaderCell>
+              <Table.HeaderCell colSpan='4'>Upcoming Classes</Table.HeaderCell>
             </Table.Row>
             <Table.Row>
               <Table.HeaderCell rowSpan='2'>Name</Table.HeaderCell>
@@ -52,11 +52,11 @@ class ShowList extends React.Component {
           </Table.Header>
 
           <Table.Body>
-            {this.renderShows()}
+            {this.renderClasses()}
           </Table.Body>
         </Table>
-  	  </div>
-  	);
+      </div>
+    );
   }
 }
 
@@ -64,4 +64,4 @@ function mapStateToProps({ events, venues }) {
   return { events, venues };
 }
 
-export default connect(mapStateToProps, actions)(ShowList);
+export default connect(mapStateToProps, actions)(ClassList);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const { Schema } = mongoose;
 
 const eventSchema = new Schema({
@@ -21,7 +22,7 @@ const eventSchema = new Schema({
     required: 'You mused supply an event time!'
   },
   venue: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Venue',
     required: 'You must supply a venue!'
   },
@@ -31,5 +32,13 @@ const eventSchema = new Schema({
     required: 'You must supply the type of event!'
   }
 });
+
+// function autopopulate(next) {
+//   this.populate('venue');
+//   next();
+// }
+
+// eventSchema.pre('find', autopopulate);
+// eventSchema.pre('findOne', autopopulate);
 
 module.exports = mongoose.model('Event', eventSchema);

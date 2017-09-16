@@ -1,17 +1,17 @@
 import React from 'react';
 import { Container, Button } from 'semantic-ui-react'; 
 import { Link } from 'react-router-dom';
-import ShowList from './ShowList';
+import ClassList from './ClassList';
 
-class ShowLanding extends React.Component {
+class ClassLanding extends React.Component {
   render() {
     return (
       <Container>
-        <h1>Shows</h1>
-        <ShowList />
+        <h1>Classes</h1>
+        <ClassList />
         <Button
           as={Link}
-          to='/shows/new'
+          to='/classes/new'
           circular
           icon='plus'
           color='black'
@@ -23,4 +23,4 @@ class ShowLanding extends React.Component {
   }
 }
 
-export default ShowLanding;
+export default ClassLanding;

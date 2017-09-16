@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
-import ShowForm from './ShowForm';
+import ClassForm from './ClassForm';
 
 export default () => {
   return (
     <Container>
-      <h1>Add a Show</h1>
-      <ShowForm />
+      <h1>Add a Class</h1>
+      <ClassForm />
     </Container>
   );
 }

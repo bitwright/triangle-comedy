@@ -10,6 +10,7 @@ require('./models/Venue');
 require('./models/Event');
 require('./services/passport');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoUri);
 
 const app = express();
