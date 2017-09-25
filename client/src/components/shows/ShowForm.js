@@ -80,7 +80,7 @@ class ShowForm extends React.Component {
           />
         </Form.Field>
         {error && <strong>{error}</strong>}
-        <Button type='submit' color='blue'>Create</Button>
+        <Button type='submit' color='blue' disabled={submitting}>Create</Button>
       </Form>
     );
   }
