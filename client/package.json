@@ -10,9 +10,6 @@
       "target": "http://localhost:5000"
     }
   },
-  "devDependencies": {
-    "react-scripts": "1.0.13"
-  },
   "dependencies": {
     "axios": "^0.16.2",
     "moment": "^2.18.1",
@@ -23,6 +20,7 @@
     "react-places-autocomplete": "^5.4.3",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.13",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
