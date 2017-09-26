@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import VenueForm from './VenueForm';
+import React from "react";
+import { Container } from "semantic-ui-react";
+import VenueForm from "./VenueForm";
 
 export default () => {
   return (
@@ -9,4 +9,4 @@ export default () => {
       <VenueForm />
     </Container>
   );
-}
+};

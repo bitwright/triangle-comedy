@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import ClassForm from './ClassForm';
+import React from "react";
+import { Container } from "semantic-ui-react";
+import ClassForm from "./ClassForm";
 
 export default () => {
   return (
@@ -9,4 +9,4 @@ export default () => {
       <ClassForm />
     </Container>
   );
-}
+};

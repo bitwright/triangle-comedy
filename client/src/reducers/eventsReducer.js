@@ -1,4 +1,4 @@
-import { FETCH_SHOWS, FETCH_MICS, FETCH_CLASSES } from '../actions/types';
+import { FETCH_SHOWS, FETCH_MICS, FETCH_CLASSES } from "../actions/types";
 
 export default function(state = [], action) {
   switch (action.type) {

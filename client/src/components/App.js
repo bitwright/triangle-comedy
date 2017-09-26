@@ -1,18 +1,18 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import * as actions from '../actions';
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
-import Header from './Header';
-import Landing from './Landing';
-import VenueLanding from './venues/VenueLanding';
-import VenueNew from './venues/VenueNew.js'
-import ShowLanding from './shows/ShowLanding';
-import ShowNew from './shows/ShowNew';
-import MicLanding from './mics/MicLanding';
-import MicNew from './mics/MicNew';
-import ClassLanding from './classes/ClassLanding';
-import ClassNew from './classes/ClassNew';
+import Header from "./Header";
+import Landing from "./Landing";
+import VenueLanding from "./venues/VenueLanding";
+import VenueNew from "./venues/VenueNew.js";
+import ShowLanding from "./shows/ShowLanding";
+import ShowNew from "./shows/ShowNew";
+import MicLanding from "./mics/MicLanding";
+import MicNew from "./mics/MicNew";
+import ClassLanding from "./classes/ClassLanding";
+import ClassNew from "./classes/ClassNew";
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,9 +34,9 @@ class App extends React.Component {
           <Route exact path="/classes" component={ClassLanding} />
           <Route exact path="/classes/new" component={ClassNew} />
         </div>
-      </BrowserRouter>  
+      </BrowserRouter>
     );
   }
-};
+}
 
 export default connect(null, actions)(App);

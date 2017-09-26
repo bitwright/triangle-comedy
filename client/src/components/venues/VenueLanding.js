@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import VenueList from './VenueList.js';
+import React from "react";
+import { Container, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import VenueList from "./VenueList.js";
 
 class VenueLanding extends React.Component {
   render() {
@@ -9,14 +9,14 @@ class VenueLanding extends React.Component {
       <Container>
         <h1>Venues</h1>
         <VenueList />
-        <Button 
+        <Button
           as={Link}
-          to='/venues/new'
-          circular 
-          icon='plus' 
-          color='black'
-          floated='right' 
-          size='large' 
+          to="/venues/new"
+          circular
+          icon="plus"
+          color="black"
+          floated="right"
+          size="large"
         />
       </Container>
     );

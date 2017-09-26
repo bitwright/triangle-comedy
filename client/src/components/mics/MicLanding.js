@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container, Button } from 'semantic-ui-react'; 
-import { Link } from 'react-router-dom';
-import MicList from './MicList';
+import React from "react";
+import { Container, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import MicList from "./MicList";
 
 class MicLanding extends React.Component {
   render() {
@@ -11,12 +11,12 @@ class MicLanding extends React.Component {
         <MicList />
         <Button
           as={Link}
-          to='/mics/new'
+          to="/mics/new"
           circular
-          icon='plus'
-          color='black'
-          floated='right'
-          size='large'
+          icon="plus"
+          color="black"
+          floated="right"
+          size="large"
         />
       </Container>
     );

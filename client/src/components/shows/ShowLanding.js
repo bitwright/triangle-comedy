@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container, Button } from 'semantic-ui-react'; 
-import { Link } from 'react-router-dom';
-import ShowList from './ShowList';
+import React from "react";
+import { Container, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import ShowList from "./ShowList";
 
 class ShowLanding extends React.Component {
   render() {
@@ -11,12 +11,12 @@ class ShowLanding extends React.Component {
         <ShowList />
         <Button
           as={Link}
-          to='/shows/new'
+          to="/shows/new"
           circular
-          icon='plus'
-          color='black'
-          floated='right'
-          size='large'
+          icon="plus"
+          color="black"
+          floated="right"
+          size="large"
         />
       </Container>
     );

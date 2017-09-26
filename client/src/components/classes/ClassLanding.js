@@ -1,7 +1,7 @@
-import React from 'react';
-import { Container, Button } from 'semantic-ui-react'; 
-import { Link } from 'react-router-dom';
-import ClassList from './ClassList';
+import React from "react";
+import { Container, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import ClassList from "./ClassList";
 
 class ClassLanding extends React.Component {
   render() {
@@ -11,12 +11,12 @@ class ClassLanding extends React.Component {
         <ClassList />
         <Button
           as={Link}
-          to='/classes/new'
+          to="/classes/new"
           circular
-          icon='plus'
-          color='black'
-          floated='right'
-          size='large'
+          icon="plus"
+          color="black"
+          floated="right"
+          size="large"
         />
       </Container>
     );

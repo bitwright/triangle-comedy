@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import MicForm from './MicForm';
+import React from "react";
+import { Container } from "semantic-ui-react";
+import MicForm from "./MicForm";
 
 export default () => {
   return (
@@ -9,4 +9,4 @@ export default () => {
       <MicForm />
     </Container>
   );
-}
+};
