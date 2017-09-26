@@ -1,17 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 const { Schema } = mongoose;
+const Venue = mongoose.model("Venue");
 
 const eventSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: 'An event must have a creator!'
+    ref: "User",
+    required: "An event must have a creator!"
   },
   name: {
     type: String,
     trim: true,
-    required: 'You must supply an event name!'
+    required: "You must supply an event name!"
   },
   description: {
     type: String,
@@ -19,26 +20,26 @@ const eventSchema = new Schema({
   },
   time: {
     type: Date,
-    required: 'You mused supply an event time!'
+    required: "You mused supply an event time!"
   },
   venue: {
     type: Schema.Types.ObjectId,
-    ref: 'Venue',
-    required: 'You must supply a venue!'
+    ref: "Venue",
+    required: "You must supply a venue!"
   },
   photo: String,
   category: {
     type: String,
-    required: 'You must supply the type of event!'
+    required: "You must supply the type of event!"
   }
 });
 
-// function autopopulate(next) {
-//   this.populate('venue');
-//   next();
-// }
+function autopopulate(next) {
+  this.populate({ path: "venue", select: "name" });
+  next();
+}
 
-// eventSchema.pre('find', autopopulate);
-// eventSchema.pre('findOne', autopopulate);
+eventSchema.pre("find", autopopulate);
+eventSchema.pre("findOne", autopopulate);
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model("Event", eventSchema);
