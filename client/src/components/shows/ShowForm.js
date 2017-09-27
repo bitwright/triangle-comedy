@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { withRouter } from "react-router-dom";
 import { Form, Button } from "semantic-ui-react";
-import Datetime from "react-datetime";
 import {
   renderField,
   FileInput,
@@ -44,7 +43,7 @@ class ShowForm extends React.Component {
   }
 
   render() {
-    const { error, handleSubmit, pristine, submitting } = this.props;
+    const { error, handleSubmit, submitting } = this.props;
 
     return (
       <Form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
