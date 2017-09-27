@@ -1,6 +1,7 @@
 # Triangle Comedy
 
 > A web app for comedians in the Triangle Area of North Carolina looking for local venues and events
+
 > The front end is built with React/Redux/ReduxForm/Semantic-UI-React with Node/Express/MongoDB on the back end.
 
 ## Build Setup
