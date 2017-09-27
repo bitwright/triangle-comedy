@@ -9,6 +9,40 @@ import {
 } from "react-google-maps";
 import axios from "axios";
 
+class VenueMarker extends React.Component {
+  constructor() {
+    super();
+    this.state = { isOpen: false };
+  }
+
+  onToggleOpen() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  render() {
+    console.log(this.state);
+    const { venue } = this.props;
+    return (
+      <Marker
+        position={{
+          lat: venue.location.coordinates[0],
+          lng: venue.location.coordinates[1]
+        }}
+        onClick={this.onToggleOpen.bind(this)}
+      >
+        {this.state.isOpen && (
+          <InfoWindow onCloseClick={this.onToggleOpen.bind(this)}>
+            <div>
+              <p>{venue.name}</p>
+              <p>{venue.location.address}</p>
+            </div>
+          </InfoWindow>
+        )}
+      </Marker>
+    );
+  }
+}
+
 const MapWithMarkedInfoWindows = compose(
   withProps({
     googleMapURL:
@@ -36,15 +70,7 @@ const MapWithMarkedInfoWindows = compose(
     defaultCenter={{ lat: 35.780728, lng: -78.656185 }}
   >
     {props.markers.map(marker => {
-      return (
-        <Marker
-          key={marker._id}
-          position={{
-            lat: marker.location.coordinates[0],
-            lng: marker.location.coordinates[1]
-          }}
-        />
-      );
+      return <VenueMarker venue={marker} key={marker._id} />;
     })}
   </GoogleMap>
 ));
