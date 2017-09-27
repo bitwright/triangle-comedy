@@ -1,5 +1,5 @@
 import React from "react";
-import { compose, withStateHandlers } from "recompose";
+import { compose, withProps, lifecycle } from "recompose";
 import {
   withScriptjs,
   withGoogleMap,
@@ -7,48 +7,51 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
+import axios from "axios";
 
-const MapWithAMarkedInfoWindow = compose(
-  withStateHandlers(
-    () => ({
-      isOpen: false
-    }),
-    {
-      onToggleOpen: ({ isOpen }) => () => ({
-        isOpen: !isOpen
-      })
-    }
-  ),
+const MapWithMarkedInfoWindows = compose(
+  withProps({
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyADvJGNIqxVR67oT-sRqnAhDSvsUTlb-6A&v=3.exp&libraries=geometry,drawing,places",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />
+  }),
   withScriptjs,
-  withGoogleMap
+  withGoogleMap,
+  lifecycle({
+    componentWillMount() {
+      this.setState({ markers: [] });
+    },
+
+    componentDidMount() {
+      axios.get("/api/venues").then(res => {
+        this.setState({ markers: res.data });
+      });
+    }
+  })
 )(props => (
   <GoogleMap
     defaultZoom={10}
     defaultCenter={{ lat: 35.780728, lng: -78.656185 }}
   >
-    <Marker
-      position={{ lat: 35.780728, lng: -78.656185 }}
-      onClick={props.onToggleOpen}
-    >
-      {props.isOpen && (
-        <InfoWindow onCloseClick={props.onToggleOpen}>
-          <p>Goodnights Comedy Club</p>
-        </InfoWindow>
-      )}
-    </Marker>
+    {props.markers.map(marker => {
+      return (
+        <Marker
+          key={marker._id}
+          position={{
+            lat: marker.location.coordinates[0],
+            lng: marker.location.coordinates[1]
+          }}
+        />
+      );
+    })}
   </GoogleMap>
 ));
 
 class MapContainer extends React.Component {
   render() {
-    return (
-      <MapWithAMarkedInfoWindow
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyADvJGNIqxVR67oT-sRqnAhDSvsUTlb-6A&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
-    );
+    return <MapWithMarkedInfoWindows />;
   }
 }
 
